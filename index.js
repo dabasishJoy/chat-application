@@ -6,7 +6,9 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const loginRouter = require("./router/loginRouter");
-
+const userRouter = require("./router/userRouter");
+const inboxRouter = require("./router/inboxRouter");
+const decorateHtmlResponse = require("./middleware/common/decorateHtmlResponse");
 const {
   notFoundHanlder,
   errorHandler,
@@ -60,9 +62,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // routing
-app.use("/", loginRouter);
-// app.use("/user", userRouter);
-// app.use("/inbox", inboxRouter);
+app.use("/", decorateHtmlResponse("Login"), loginRouter);
+app.use("/users", decorateHtmlResponse("Users"), userRouter);
+app.use("/inbox", decorateHtmlResponse("Inbox"), inboxRouter);
 
 // not found hanlder
 app.use(notFoundHanlder);
