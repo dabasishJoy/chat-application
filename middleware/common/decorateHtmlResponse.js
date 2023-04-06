@@ -1,5 +1,4 @@
 function decorateHtmlResponse(page_title) {
-  // return a middle ware
   return function (req, res, next) {
     res.locals.html = true;
     res.locals.title = `${page_title} - ${process.env.APP_NAME}`;
@@ -9,4 +8,5 @@ function decorateHtmlResponse(page_title) {
     next();
   };
 }
+
 module.exports = decorateHtmlResponse;

@@ -1,4 +1,5 @@
 const multer = require("multer");
+const path = require("path");
 
 function singFileUploader(
   subfolder_path,
@@ -13,7 +14,7 @@ function singFileUploader(
     destination: (req, file, callback) => {
       callback(null, UPLOADS_FOLDER);
     },
-    filename: (req, file, cb) => {
+    filename: (req, file, callback) => {
       // file extenstion
       const fileExtension = path.extname(file.originalname);
       const fileName =
