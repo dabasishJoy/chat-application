@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const loginRouter = require("./router/loginRouter");
 
 const {
   notFoundHanlder,
@@ -59,6 +60,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // routing
+app.use("/", loginRouter);
+// app.use("/user", userRouter);
+// app.use("/inbox", inboxRouter);
 
 // not found hanlder
 app.use(notFoundHanlder);
